@@ -14,3 +14,8 @@ Esto es un bot de discord
 El Archivo de config no esta funcionando, tienen que conseguirse token
 
 Es node
+
+
+Para correr en aws hay que matar el proceso de esto que este corriendo, y correr
+:nohup /home/ec2-user/.nvm/versions/node/v16.18.0/bin/node index.js > log.out 2>&1 &
+:disown -a
