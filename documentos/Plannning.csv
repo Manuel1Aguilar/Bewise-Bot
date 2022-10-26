@@ -6,4 +6,4 @@ Sacarle los MS a la /hora,Bug,Manu,21/10/2022,21/10/2022
 /tarea agregar una tarea al planning del bot,Feature,,21/10/2022,
 /tareas ver listado de tareas,Feature,,21/10/2022,
 /tarea {num tarea} (agregar numero de tarea) tomar la tarea especificada,Feature,,21/10/2022,
-/aniversarios {fechaCumple, fechaIngreso, nombre} agregar fila Cumples_Bewise.csv,Feature,,21/10/2022,
+/aniversarios {fechaCumple fechaIngreso nombre} agregar fila Cumples_Bewise.csv,Feature,,21/10/2022,
