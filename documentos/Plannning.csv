@@ -1,8 +1,9 @@
 DESCRIPCION,TIPO,TOMADO POR,FECHA CREACION,FECHA FIN
-Que el bot mande mensaje en los cumpleaños / aniversario en la empresa de cada uno a partir del excel de cumpleaños/aniversarios,Feature,Manu,21/10/2022,
+Que el bot mande mensaje en los cumpleaños en la empresa de cada uno a partir del excel de cumpleaños,Feature,Manu,21/10/2022,26/10/2022
 Sacarle los MS a la /hora,Bug,Manu,21/10/2022,21/10/2022
 /chistes te tira un chiste random,Feature,,21/10/2022,
 /maps {busqueda} {lugar} te busca algo en un lugar segun la api de google maps,Feature,,21/10/2022,
 /tarea agregar una tarea al planning del bot,Feature,,21/10/2022,
 /tareas ver listado de tareas,Feature,,21/10/2022,
 /tarea {num tarea} (agregar numero de tarea) tomar la tarea especificada,Feature,,21/10/2022,
+/aniversarios {fechaCumple, fechaIngreso, nombre} agregar fila Cumples_Bewise.csv,Feature,,21/10/2022,
