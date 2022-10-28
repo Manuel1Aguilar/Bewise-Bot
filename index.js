@@ -48,25 +48,27 @@ client.once("ready", () => {
     let scheduledMessage = new cron.CronJob('0 05 12 * * *', async () => {
         
         const bdays =await checkBirthdays();
-        const guild = client.guilds.cache.get(guildId);
-        const channel = guild.channels.cache.get(birthdayChannelID);
-        let connector = "le";
-        const addMiddle = bdays.length > 1;
-        let bdaysString = bdays.shift();
-        let lastBday = "";
-        if(bdays.length > 0){
-            lastBday = " y " + bdays.pop();
-            connector = "les";
+        if(bdays){
+            const guild = client.guilds.cache.get(guildId);
+            const channel = guild.channels.cache.get(birthdayChannelID);
+            let connector = "le";
+            const addMiddle = bdays.length > 1;
+            let bdaysString = bdays.shift();
+            let lastBday = "";
+            if(bdays.length > 0){
+                lastBday = " y " + bdays.pop();
+                connector = "les";
+            }
+            if(addMiddle){
+                bdays.forEach(x => {
+                    bdaysString += ", " + x;
+                });
+            }
+            
+            bdaysString += lastBday;
+            console.log(`Hoy es el natalicio de ${bdaysString}! Muy feliz cumpleaños ${connector} desea **La familia Bewise!**`);
+            channel.send(`Hoy es el natalicio de ${bdaysString}! Muy feliz cumpleaños ${connector} desea **La familia Bewise!**`);
         }
-        if(addMiddle){
-            bdays.forEach(x => {
-                bdaysString += ", " + x;
-            });
-        }
-        
-        bdaysString += lastBday;
-        console.log(`Hoy es el natalicio de ${bdaysString}! Muy feliz cumpleaños ${connector} desea **La familia Bewise!**`);
-        channel.send(`Hoy es el natalicio de ${bdaysString}! Muy feliz cumpleaños ${connector} desea **La familia Bewise!**`);
     },{
         timezone: "America/Argentina/Buenos_Aires"
       });
