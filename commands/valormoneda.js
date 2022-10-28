@@ -1,6 +1,5 @@
 const { SlashCommandBuilder  } = require('discord.js');
 const getValue = require('../utils/currencyAPI');
-const { fetch  } = require('node-fetch');
 
 
 new SlashCommandBuilder()
