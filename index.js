@@ -5,6 +5,7 @@ const { Client, Collection, GatewayIntentBits, Events, Message } = require('disc
 const { token, birthdayChannelID, guildId } = require('./config.json');
 const { RAE } = require('rae-api');
 const checkBirthdays = require('./utils/checkBirthdays.js');
+const getWOTDMsg = require('./utils/raeAPI.js');
 const cron = require('cron');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
@@ -45,12 +46,16 @@ client.on(Events.InteractionCreate, async  interaction => {
 client.once("ready", () => {
     console.log(`Online as ${client.user.tag}`);
       
-    let scheduledMessage = new cron.CronJob('0 05 09 * * *', async () => {
+    //let scheduledMessage = new cron.CronJob('0 32 18 * * *', async () => {
         
+    let scheduledMessage = new cron.CronJob('* * * * * *', async () => {
+        const guild = client.guilds.cache.get(guildId);
+        const channel = guild.channels.cache.get(birthdayChannelID);
         const bdays =await checkBirthdays();
-        if(bdays){
-            const guild = client.guilds.cache.get(guildId);
-            const channel = guild.channels.cache.get(birthdayChannelID);
+        channel.send(await getWOTDMsg());
+
+        if(!(bdays === undefined || bdays.length == 0)){
+
             let connector = "le";
             const addMiddle = bdays.length > 1;
             let bdaysString = bdays.shift();
