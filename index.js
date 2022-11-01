@@ -46,7 +46,8 @@ client.on(Events.InteractionCreate, async  interaction => {
 client.once("ready", () => {
     console.log(`Online as ${client.user.tag}`);
       
-    //let scheduledMessage = new cron.CronJob('0 32 18 * * *', async () => {
+
+    let scheduledMessage = new cron.CronJob('0 05 12 * * *', async () => {
         
     let scheduledMessage = new cron.CronJob('* * * * * *', async () => {
         const guild = client.guilds.cache.get(guildId);
