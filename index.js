@@ -49,7 +49,7 @@ client.once("ready", () => {
 
     let scheduledMessage = new cron.CronJob('0 05 12 * * *', async () => {
         
-    let scheduledMessage = new cron.CronJob('* * * * * *', async () => {
+    //let scheduledMessage = new cron.CronJob('* * * * * *', async () => { NO DESCOMENTAR ONLY 4 TESTING
         const guild = client.guilds.cache.get(guildId);
         const channel = guild.channels.cache.get(birthdayChannelID);
         const bdays =await checkBirthdays();
