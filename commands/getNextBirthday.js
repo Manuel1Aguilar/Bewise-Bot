@@ -5,13 +5,21 @@ new SlashCommandBuilder();
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("proximos-cumples")
-    .setDescription("Mostrar los próximos cumpleaños a partir de hoy"),
+    .setDescription("Mostrar los próximos cumpleaños a partir de hoy")
+    .addIntegerOption((option) =>
+      option
+        .setName("cantidad")
+        .setDescription("Cantidad elementos a mostrar")
+        .setRequired(false)
+        .setMinValue(1)
+    ),
   async execute(interaction) {
+    const cantidad = interaction.options.get("cantidad", false)?.value;
     let msg = "";
 
     const birthdays = await nextBirthday();
 
-    birthdays.forEach((birthday) => {
+    birthdays.forEach((birthday, index) => {
       const { name, surname, birthDate } = birthday;
       const { day, month, year } = {
         day: birthDate.getDate(),
@@ -22,7 +30,11 @@ module.exports = {
         weekday: "long",
       });
 
-      msg += `${name} ${surname} - ${monthDay} ${day}/${month}/${year}\n`;
+      if (cantidad && index < cantidad) {
+        msg += `${name} ${surname} - ${monthDay} ${day}/${month}/${year}\n`;
+      } else if (!cantidad) {
+        msg += `${name} ${surname} - ${monthDay} ${day}/${month}/${year}\n`;
+      }
     });
 
     console.log(msg);
