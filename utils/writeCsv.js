@@ -65,8 +65,8 @@ module.exports = {
     return csvWriter
       .writeRecords(data)
       .then(() => {
-        console.log(`Se crearon nuevos registros en la tabla ${filename.toLowerCase()}`, data);
-        return `Se crearon nuevos registros en la tabla ${filename.toLowerCase()}`;
+        console.log(`✔ Se crearon nuevos registros en la tabla ${filename.toLowerCase()}`, data);
+        return `✔ Se crearon nuevos registros en la tabla ${filename.toLowerCase()}`;
       })
       .catch((error) => {
         console.error(error);
