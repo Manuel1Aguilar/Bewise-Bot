@@ -1,0 +1,12 @@
+ID,Descripción,Tipo,Responsable,Fecha de creación,Fecha de finalización
+1,Que el bot mande mensaje en los cumpleaños en la empresa de cada uno a partir del excel de cumpleaños,Feature,Manu,21/10/2022,26/10/2022
+2,Sacarle los MS a la /hora,Bug,Manu,21/10/2022,21/10/2022
+3,/chistes te tira un chiste random,Feature,,21/10/2022,
+4,/maps {busqueda} {lugar} te busca algo en un lugar segun la api de google maps,Feature,,21/10/2022,
+5,/tarea agregar una tarea al planning del bot,Feature,,21/10/2022,
+6,/tareas ver listado de tareas,Feature,,21/10/2022,
+7,/tarea {num tarea} (agregar numero de tarea) tomar la tarea especificada,Feature,,21/10/2022,
+8,/aniversarios {fechaCumple fechaIngreso nombre} agregar fila Cumples_Bewise.csv,Feature,,21/10/2022,
+9,Pedir empanadas,Feature,[DEV] RAE BEWISE BOT,4/11/2022,
+10,Comprar las empanadas,Feature,pudi,4/11/2022,nunca
+11,Comer las empanadas,Otro,pudi,4/11/2022,nunca
