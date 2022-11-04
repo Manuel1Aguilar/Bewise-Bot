@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const nextBirthday = require("../utils/nextBirthday");
+const nextBirthdays = require("../utils/nextBirthdays");
 
 new SlashCommandBuilder();
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
     const cantidad = interaction.options.get("cantidad", false)?.value;
     let msg = "";
 
-    const birthdays = await nextBirthday();
+    const birthdays = await nextBirthdays();
 
     birthdays.forEach((birthday, index) => {
       const { name, surname, birthDate } = birthday;
