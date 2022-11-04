@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { parse } = require("csv-parse");
 
-module.exports = async function checkBirthdays() {
+module.exports = async function nextBirthdays() {
   let birthdayBoyGirls = [];
   const stream = fs
     .createReadStream("./documentos/Cumples_Bewise.csv")
