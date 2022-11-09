@@ -33,6 +33,9 @@ function getHeader(filename) {
 
 module.exports = {
   files: Files,
+  headers: (filename) => {
+    return getHeader(filename);
+  },
   writeCsv: async ({ filename, data }) => {
     const csvWriter = createCsvWriter({
       path: `./documentos/${filename}.csv`,
@@ -56,8 +59,8 @@ module.exports = {
       data = data.map((_data) => {
         maxId++;
         return {
-          ..._data,
           id: maxId,
+          ..._data,
         };
       });
     }
@@ -65,12 +68,18 @@ module.exports = {
     return csvWriter
       .writeRecords(data)
       .then(() => {
-        console.log(`✔ Se crearon nuevos registros en la tabla ${filename.toLowerCase()}`, data);
-        return `✔ Se crearon nuevos registros en la tabla ${filename.toLowerCase()}`;
+        console.log(
+          `✔ Se crearon nuevos registros en la tabla ${filename.toLowerCase()}\n`,
+          data
+        );
+        return data;
       })
       .catch((error) => {
-        console.error(error);
-        return `No fue posible crear nuevos registros en la tabla ${filename.toLowerCase()} ☹️`;
+        console.error(
+          `No fue posible crear nuevos registros en la tabla ${filename.toLowerCase()} ☹️\n`,
+          error
+        );
+        return false;
       });
   },
 };

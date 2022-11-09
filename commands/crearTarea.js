@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require("discord.js");
-const { writeCsv, files } = require("../utils/writeCsv");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { writeCsv, files, headers } = require("../utils/writeCsv");
 
 new SlashCommandBuilder();
 module.exports = {
@@ -43,6 +43,8 @@ module.exports = {
 
     let msg = "";
 
+    let result = false;
+
     const today = new Date();
     const { day, month, year } = {
       day: today.getDate(),
@@ -50,7 +52,7 @@ module.exports = {
       year: today.getFullYear(),
     };
 
-    msg += await writeCsv({
+    result = await writeCsv({
       filename: files[0],
       data: [
         {
@@ -63,6 +65,49 @@ module.exports = {
       ],
     });
 
-    await interaction.reply(msg);
+    const fileHeaders = headers(files[0]);
+
+    result
+      ? (msg += `✔ Se creó un nuevo registro en la tabla ${files[0].toLowerCase()}`)
+      : (msg += `No fue posible crear un nuevo registro en la tabla ${files[0].toLowerCase()} ☹️`);
+
+    const orderedFields = result
+      .map((data) => {
+        return {
+          responsible: data.responsible,
+          type: data.type,
+          finishBy: data.finishBy,
+        };
+      })
+      .flat();
+
+    const embeddedMessages = result.map((field, index) => {
+      const embeddedTask = Object.keys(orderedFields[index])
+        .map((key) => {
+          return {
+            name: fileHeaders.find((header) => Object.values(header)[0] === key)
+              .title,
+            value: `${field[key] || "-"}`,
+            inline: true,
+          };
+        })
+        .flat();
+
+      const taskDescription = `[${field.id}] ${field.description}`;
+
+      const embeddedMessage = new EmbedBuilder()
+        .setColor(0x0099ff)
+        .setAuthor({
+          name: `ℹ️  Se creó un nuevo registro en la tabla ${files[0].toLowerCase()}`,
+          iconURL: interaction.user.displayAvatarURL(),
+        })
+        .setTitle(taskDescription)
+        .addFields(embeddedTask)
+        .setTimestamp();
+
+      return embeddedMessage;
+    });
+
+    await interaction.reply({ embeds: [...embeddedMessages] });
   },
 };
