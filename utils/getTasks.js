@@ -26,7 +26,7 @@ function sortAlphabets(tasks, field, order) {
   return sortedTasks;
 }
 
-module.exports = async function getTasks(filters = { responsible }, orderBy) {
+module.exports = async function getTasks(filters = { responsible }, orderBy, terminadas) {
   let tasks = [];
 
   const stream = fs
@@ -42,18 +42,35 @@ module.exports = async function getTasks(filters = { responsible }, orderBy) {
       createdAt: chunk[4],
       finishBy: chunk[5],
     };
-
-    Object.keys(filters).forEach((filter) => {
-      if (task[filter] === filters[filter]) {
-        tasks.push(task);
-      } else if (!filters[filter]) {
-        switch (filter) {
-          case "responsible":
+    if(terminadas){
+      if(task.finishBy){
+        Object.keys(filters).forEach((filter) => {
+          if (task[filter] === filters[filter]) {
             tasks.push(task);
-            break;
-        }
+          } else if (!filters[filter]) {
+            switch (filter) {
+              case "responsible":
+                tasks.push(task);
+                break;
+            }
+          }
+        });
       }
-    });
+    }else{
+      if(!task.finishBy){
+        Object.keys(filters).forEach((filter) => {
+          if (task[filter] === filters[filter]) {
+            tasks.push(task);
+          } else if (!filters[filter]) {
+            switch (filter) {
+              case "responsible":
+                tasks.push(task);
+                break;
+            }
+          }
+        });
+      }
+    }
   }
 
   if (orderBy) {
