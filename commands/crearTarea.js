@@ -81,40 +81,33 @@ module.exports = {
       })
       .flat();
 
-    const embeddedFields = orderedFields
-      .map((data) => {
-        return [
-          ...Object.keys(data).map((key) => {
-            return {
-              name: fileHeaders.find(
-                (header) => Object.values(header)[0] === key
-              ).title,
-              value: `${data[key] || "-"}`,
-              inline: true,
-            };
-          }),
-        ];
-      })
-      .flat();
+    const embeddedMessages = result.map((field, index) => {
+      const embeddedTask = Object.keys(orderedFields[index])
+        .map((key) => {
+          return {
+            name: fileHeaders.find((header) => Object.values(header)[0] === key)
+              .title,
+            value: `${field[key] || "-"}`,
+            inline: true,
+          };
+        })
+        .flat();
 
-    const tasksDescriptions = result
-      .map((data, index) => {
-        return `[${data.id}] ${data.description}${
-          index !== result.length - 1 ? "\n" : ""
-        }`;
-      })
-      .join("");
+      const taskDescription = `[${field.id}] ${field.description}`;
 
-    const embeddedMessage = new EmbedBuilder()
-      .setColor(0x0099ff)
-      .setAuthor({
-        name: `ℹ️  Se creó un nuevo registro en la tabla ${files[0].toLowerCase()}`,
-        iconURL: interaction.user.displayAvatarURL(),
-      })
-      .setTitle(tasksDescriptions)
-      .addFields(embeddedFields)
-      .setTimestamp();
+      const embeddedMessage = new EmbedBuilder()
+        .setColor(0x0099ff)
+        .setAuthor({
+          name: `ℹ️  Se creó un nuevo registro en la tabla ${files[0].toLowerCase()}`,
+          iconURL: interaction.user.displayAvatarURL(),
+        })
+        .setTitle(taskDescription)
+        .addFields(embeddedTask)
+        .setTimestamp();
 
-    await interaction.reply({ embeds: [embeddedMessage] });
+      return embeddedMessage;
+    });
+
+    await interaction.reply({ embeds: [...embeddedMessages] });
   },
 };
