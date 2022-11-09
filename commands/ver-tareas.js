@@ -44,7 +44,7 @@ module.exports = {
       responsible: responsable?.user?.username,
     };
 
-    let emptyEmbedsMsg = "No hay tareas que cumplan el criterio de búsqueda";
+    let emptyEmbedsMsg = "No hay tareas que cumplan con el criterio de búsqueda";
     let embeds = [];
 
     console.log("filters data", filters);
