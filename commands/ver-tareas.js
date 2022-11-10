@@ -7,6 +7,11 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("ver-tareas")
     .setDescription("Mostrar las tareas pendientes")
+    .addBooleanOption((option) => 
+    option
+      .setName("terminadas")
+      .setDescription("Filtrar segun estado")
+      .setRequired(false))
     .addIntegerOption((option) =>
       option
         .setName("cantidad")
@@ -40,6 +45,7 @@ module.exports = {
     const cantidad = interaction.options.get("cantidad", false)?.value;
     const responsable = interaction.options.get("responsable", false);
     const orderBy = interaction.options.get("ordenar", false)?.value;
+    const terminadas = interaction.options.get("terminadas", false)?.value;
     const filters = {
       responsible: responsable?.user?.username,
     };
@@ -49,7 +55,8 @@ module.exports = {
 
     console.log("filters data", filters);
     console.log("order by", orderBy);
-    const tasks = await getTasks(filters, orderBy);
+    console.log("terminadas", terminadas);
+    const tasks = await getTasks(filters, orderBy, terminadas);
 
     tasks.forEach((task, index) => {
       const taskDescription = `[${task.id}] ${task.description}`;
