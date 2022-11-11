@@ -1,5 +1,11 @@
 {
-    "token": "CONSIGANSE UN TOKEN DE UN CANAL DE PRUEBA SI PUSHEO ESTO SE ROMPI TROMPI TODO",
-    "clientId": "ESTO NO SË DE ULTIMA ME PIDEN QUE SE LOS PASE",
-    "guildId": "LES PASO LA CONFIGURACION Y LISTO; ESTO SERIA EL ID DEL CANAL"
+    "token": "PLACEHOLDER",
+    "clientId": "PLACEHOLDER",
+    "guildId": "PLACEHOLDER",
+    "birthdayChannelID": "PLACEHOLDER",
+    "currencyApiKey": "PLACEHOLDER",
+    "botMasterRole": {
+        "id": "PLACEHOLDER",
+        "name": "PLACEHOLDER"
+    }
 }
