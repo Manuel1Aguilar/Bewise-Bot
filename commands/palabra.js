@@ -31,6 +31,6 @@ new SlashCommandBuilder()
                 }
                 msg += x.getDefinition();
             });
-            await interaction.reply(msg);
+            await interaction.reply(msg.substring(0, 2000));
         },
     };

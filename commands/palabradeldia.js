@@ -10,6 +10,6 @@ new SlashCommandBuilder()
         async execute(interaction) {
             let msg = await getWOTDMsg();
 
-            await interaction.reply(msg);
+            await interaction.reply(msg.substring(0, 2000));
         },
     };
