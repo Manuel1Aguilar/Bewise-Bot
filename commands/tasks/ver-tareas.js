@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const getTasks = require("../utils/getTasks");
-const { files } = require("../utils/writeCsv");
+const getTasks = require("../../utils/getTasks");
+const { files } = require("../../utils/writeCsv");
 
 new SlashCommandBuilder();
 module.exports = {
@@ -42,10 +42,12 @@ module.exports = {
         )
     ),
   async execute(interaction) {
+    
     const cantidad = interaction.options.get("cantidad", false)?.value;
     const responsable = interaction.options.get("responsable", false);
     const orderBy = interaction.options.get("ordenar", false)?.value;
     const terminadas = interaction.options.get("terminadas", false)?.value;
+    const { botMasterRoleId } = require('../../config.json');
     const filters = {
       responsible: responsable?.user?.username,
     };

@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const { writeCsv, files, headers } = require("../utils/writeCsv");
+const { writeCsv, files, headers } = require("../../utils/writeCsv");
+const { botMasterRole } = require('../../config.json');
 
 new SlashCommandBuilder();
 module.exports = {
@@ -36,6 +37,10 @@ module.exports = {
         .setRequired(false)
     ),
   async execute(interaction) {
+    if(!interaction.member.roles.cache.some(r => r.id === botMasterRole.id)){
+      await interaction.reply({ content: `Necesita rol: ${botMasterRole.name}`, ephemeral: true });
+      return;
+    }
     const descripcion = interaction.options.get("descripcion", true).value;
     const tipo = interaction.options.get("tipo", false)?.value;
     const responsable = interaction.options.get("responsable", false);

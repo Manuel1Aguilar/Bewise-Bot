@@ -7,13 +7,14 @@ const { RAE } = require('rae-api');
 const checkBirthdays = require('./utils/checkBirthdays.js');
 const getWOTDMsg = require('./utils/raeAPI.js');
 const cron = require('cron');
+const { getCommandFilesIndex } = require('./utils/directoryUtils');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 client.commands = new Collection();
 const rae = new RAE();
 
 const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const commandFiles = getCommandFilesIndex();
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
